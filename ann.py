@@ -64,3 +64,25 @@ y_pred = (y_pred > 0.5)
 from sklearn.metrics import confusion_matrix
 cm = confusion_matrix(y_test,y_pred)
 print(" The accuracy on test dataset is "+str(np.trace(cm)*100/np.shape(X_test)[0])+ "%" )
+
+# using the model on a new sample x_sample 
+
+ """ Use our ANN model to predict if the customer with the following informations will leave the bank: 
+
+     Geography: France
+     Credit Score: 600
+     Gender: Male
+     Age: 40 years old
+     Tenure: 3 years
+     Balance: $60000
+     Number of Products: 2
+     Does this customer have a credit card ? Yes
+     Is this customer an Active Member: Yes
+     Estimated Salary: $50000
+"""
+
+x_sample = np.array([ [0,0,1,600,40,3,60000,2,1,1,50000] ])
+x_sample_std = sc_X.transform(x_sample)
+y_sample = ann_classifier.predict(x_sample) > 0.5
+
+                    
