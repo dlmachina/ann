@@ -16,6 +16,7 @@ import pandas as pd
 dataset = pd.read_csv("Churn_Modelling.csv")
 X = dataset.iloc[:,3:13]
 y = dataset.iloc[:,-1]
+
 #encoding categorical variables 
 from sklearn.preprocessing import OneHotEncoder,OrdinalEncoder
 from sklearn.compose import ColumnTransformer
@@ -43,12 +44,15 @@ X_test = sc_X.transform(X_test)
 import keras
 from keras.models import Sequential
 from keras.layers import Dense
+from keras.layers import Dropout
 
 #initialising the ANN
 ann_classifier =  Sequential()
 
 ann_classifier.add(Dense(units = 6,kernel_initializer = "uniform", activation = "relu",input_dim = 11))
+ann_classifier.add(Dropout(p = 0.1))
 ann_classifier.add(Dense(units = 6,kernel_initializer = "uniform", activation = "relu"))
+ann_classifier.add(Dropout(p = 0.1))
 ann_classifier.add(Dense(units=1,kernel_initializer = "uniform", activation = "sigmoid"))
 
 # running the ANN
